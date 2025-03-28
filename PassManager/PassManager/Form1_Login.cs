@@ -29,11 +29,13 @@ namespace PassManager
 
 
 
-            private void btnLogin_Click(object sender, EventArgs e)
+        private void btnLogin_Click(object sender, EventArgs e)
         {
             string filePath = "manager_credentials.txt";
             string username = txtUsername.Text.Trim().ToLower(); //normalize input
             string password = txtPassword.Text;
+            string loginPairsDirectory = "login_pairs";
+            string userFilePath = Path.Combine(loginPairsDirectory, $"{username}.txt");
 
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
@@ -49,18 +51,24 @@ namespace PassManager
 
             //read credentials and check login
             var credentials = File.ReadAllLines(filePath)
-                .Select(line => line.Split(new[] { ' ' }, 2, StringSplitOptions.RemoveEmptyEntries)) //split only at first space
-                .Where(parts => parts.Length == 2)
-                .ToDictionary(parts => parts[0].ToLower(), parts => parts[1].Trim(',')); //trim trailing comma
+                .Select(line => line.Split(new[] { ' ' }, 3, StringSplitOptions.RemoveEmptyEntries)) //split at first two spaces
+                .Where(parts => parts.Length == 3) // hashed password and salt
+                .ToDictionary(parts => parts[0].ToLower(), parts => new { HashedPassword = parts[1], Salt = parts[2] });
 
-            if (credentials.TryGetValue(username, out string storedHashedPassword))
+            if (credentials.TryGetValue(username, out var storedCredentials))
             {
-                string enteredHashedPassword = new Utilities().HashPassword(password);
-                if (enteredHashedPassword == storedHashedPassword)
+                // Compare the entered password with the stored hash and salt
+                if (new Utilities().VerifyPassword(password, storedCredentials.HashedPassword, storedCredentials.Salt))
                 {
+                    // DECRYPT THE USERS PASSWORDS
+                    if (!File.Exists(userFilePath))
+                    {
+                        MessageBox.Show("No saved login pairs found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
                     MessageBox.Show("Login successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Hide();
-                    Form3_Home form3_home = new Form3_Home();
+                    Form3_Home form3_home = new Form3_Home(username, password);
                     form3_home.ShowDialog();
                 }
                 else

@@ -23,10 +23,11 @@ namespace PassManager
         private void btnRegister_Click(object sender, EventArgs e)
         {
             string filePath = "manager_credentials.txt";
+            string loginPairsDirectory = "login_pairs";
             string username = txtUsername.Text.Trim().ToLower(); //trim spaces and make case-insensitive
             string password1 = txtPassword1.Text;
             string password2 = txtPassword2.Text;
-            string hashedPassword;
+            string hashedPassword, salt;
 
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password1))
             {
@@ -45,10 +46,9 @@ namespace PassManager
                 MessageBox.Show("Passwords do not match.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            else
-            {
-                hashedPassword = new Utilities().HashPassword(password1);
-            }
+
+            //generate hashed password and salt
+            hashedPassword = new Utilities().HashPassword(password1, out salt);
 
             if (!File.Exists(filePath))
             {
@@ -66,8 +66,8 @@ namespace PassManager
                 return;
             }
 
-            //append the new credentials
-            File.AppendAllText(filePath, $"{username} {hashedPassword},\n");
+            //store username, hashed password, and salt in the format "username hashedPassword salt"
+            File.AppendAllText(filePath, $"{username} {hashedPassword} {salt}\n");
 
             MessageBox.Show("Registration successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -75,6 +75,26 @@ namespace PassManager
             txtUsername.Clear();
             txtPassword1.Clear();
             txtPassword2.Clear();
+
+
+            //CREATE A `'username.txt' FOR THE USER THAT WILL HOLD THE LOGIN PAIRS
+            //create the login_pairs directory if it doesn't exist
+            if (!Directory.Exists(loginPairsDirectory))
+            {
+                Directory.CreateDirectory(loginPairsDirectory);
+            }
+
+            //create a file for the user inside login_pairs folder
+            string userFilePath = Path.Combine(loginPairsDirectory, $"{username}.txt");
+            File.Create(userFilePath).Close();
+
+
+            // .::ONLY FOR TEST!!!::.
+            string mockPlainText = "test";
+            string encryptedTest = new Utilities().EncryptPassword(mockPlainText, password1);
+            string mockEntry = $"test_title test_username {encryptedTest},\n";
+            File.AppendAllText(userFilePath, mockEntry);
+
 
             Hide();
             Form1_Login form1_login = new Form1_Login();
