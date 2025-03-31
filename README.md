@@ -20,7 +20,7 @@ Select the password you want to view or copy straigth to your clipboard, by sele
 ### Storing Master Credentials
 User passwords are stored securely using **SHA-256 hashing with a random salt**. The hashing process involves:
 
-- Generating a **128-bit (16-byte) salt** using `RNGCryptoServiceProvider`  
+- Generating a **128-bit (16-byte) salt** using `RandomNumberGenerator`  
 - Concatenating the password with the generated salt  
 - Hashing the resulting string using **SHA-256**  
 - Storing both the hashed password and salt for future verification  
