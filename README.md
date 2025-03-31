@@ -1,13 +1,13 @@
 # Secure Password Manager
 
 ## Summary
-This Secure Password Manager is designed to store login credentials safely while offering a user-friendly interface. Key features include:
+This secure Password Manager is designed to store login credentials safely while offering a user-friendly interface. Key features include:
 
+- Secure encryption and hashing mechanisms 
 - Light and Dark theme modes  
 - Password strength indicator  
 - Search functionality  
-- Password generation (random or easy-to-remember words)  
-- Secure encryption and hashing mechanisms  
+- Password generation (random or easy-to-remember words)   
 
 ## Usage
 To use the password manager, first register an account. After logging in, you can add entries for your login credentials. Each entry consists of a title, username, and encrypted password. 
