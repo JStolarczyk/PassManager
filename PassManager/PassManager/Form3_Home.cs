@@ -30,6 +30,100 @@ namespace PassManager
             new Form1_Login().Show();
         }
 
+        private void btnShowPassword_Click(object sender, EventArgs e)
+        {
+            //ensure at least one row is selected OR the password column is clicked
+            if (dgvLoginPairs.SelectedRows.Count > 0 ||
+                (dgvLoginPairs.CurrentCell != null && dgvLoginPairs.CurrentCell.ColumnIndex == dgvLoginPairs.Columns["maskedPassword"].Index))
+            {
+                DataGridViewRow selectedRow;
+
+                //if a full row is selected, use that
+                if (dgvLoginPairs.SelectedRows.Count > 0)
+                {
+                    selectedRow = dgvLoginPairs.SelectedRows[0];
+                }
+                //if the user clicked a password cell, use that row
+                else if (dgvLoginPairs.CurrentCell != null)
+                {
+                    selectedRow = dgvLoginPairs.Rows[dgvLoginPairs.CurrentCell.RowIndex];
+                }
+                else
+                {
+                    MessageBox.Show("Please select an entry or click on a password field.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                //retrieve the encrypted password (assuming it's stored but not currently displayed in the DataGridView)
+                string encryptedPassword = selectedRow.Cells["encryptedPassword"].Value.ToString();
+
+                //decrypt the password
+                Utils utils = new Utils();
+                string decryptedPassword = utils.DecryptPassword(encryptedPassword, password);
+
+                //show the decrypted password
+                selectedRow.Cells["maskedPassword"].Value = decryptedPassword;
+
+                //hide it again after 5 seconds for security
+                Task.Delay(5000).ContinueWith(_ =>
+                {
+                    if (!dgvLoginPairs.IsDisposed)
+                    {
+                        Invoke(new Action(() =>
+                        {
+                            selectedRow.Cells["maskedPassword"].Value = new string('*', decryptedPassword.Length);
+                        }));
+                    }
+                });
+            }
+            else
+            {
+                MessageBox.Show("Please select an entry or click on the password field.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void btnCopyPassword_Click(object sender, EventArgs e)
+        {
+            //ensure at least one row is selected OR the password column is clicked
+            if (dgvLoginPairs.SelectedRows.Count > 0 ||
+                (dgvLoginPairs.CurrentCell != null && dgvLoginPairs.CurrentCell.ColumnIndex == dgvLoginPairs.Columns["maskedPassword"].Index))
+            {
+                DataGridViewRow selectedRow;
+
+                //if a full row is selected, use that
+                if (dgvLoginPairs.SelectedRows.Count > 0)
+                {
+                    selectedRow = dgvLoginPairs.SelectedRows[0];
+                }
+                //if the user clicked a password cell, use that row
+                else if (dgvLoginPairs.CurrentCell != null)
+                {
+                    selectedRow = dgvLoginPairs.Rows[dgvLoginPairs.CurrentCell.RowIndex];
+                }
+                else
+                {
+                    MessageBox.Show("Please select an entry or click on a password field.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                //retrieve the encrypted password
+                string encryptedPassword = selectedRow.Cells["encryptedPassword"].Value.ToString();
+
+                //decrypt the password
+                Utils utils = new Utils();
+                string decryptedPassword = utils.DecryptPassword(encryptedPassword, password);
+
+                //copy to clipboard
+                Clipboard.SetText(decryptedPassword);
+                MessageBox.Show("Password copied to clipboard!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Please select an entry or click on the password field.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+        }
+
         //function to load login pairs from file and bind them to dgvLoginPairs
         private void LoadLoginPairs(string username, string userPassword)
         {
@@ -44,7 +138,7 @@ namespace PassManager
 
             List<LoginPairEntry> loginPairsList = new List<LoginPairEntry>();
             string[] lines = File.ReadAllLines(userFilePath);
-            Utilities utils = new Utilities();
+            Utils utils = new Utils();
 
             foreach (string line in lines)
             {
@@ -70,7 +164,8 @@ namespace PassManager
                 {
                     title = pairTitle,
                     username = pairUsername,
-                    maskedPassword = maskedPassword
+                    maskedPassword = maskedPassword,
+                    encryptedPassword = pairEncryptedPassword
                 });
             }
 
@@ -83,6 +178,7 @@ namespace PassManager
             dgvLoginPairs.Columns["title"].HeaderText = "Title";
             dgvLoginPairs.Columns["username"].HeaderText = "Username / Email";
             dgvLoginPairs.Columns["maskedPassword"].HeaderText = "Password";
+            dgvLoginPairs.Columns["encryptedPassword"].Visible = false;
 
             dgvLoginPairs.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Bold);
             dgvLoginPairs.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;

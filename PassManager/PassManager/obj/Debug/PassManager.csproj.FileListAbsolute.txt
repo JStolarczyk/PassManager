@@ -45,3 +45,15 @@ C:\Users\JStol\Desktop\PasswordManager\PassManager\PassManager\obj\Debug\PassMan
 C:\Users\JStol\Desktop\PasswordManager\PassManager\PassManager\bin\Debug\PassManager.exe.config
 C:\Users\JStol\Desktop\PasswordManager\PassManager\PassManager\bin\Debug\PassManager.exe
 C:\Users\JStol\Desktop\PasswordManager\PassManager\PassManager\bin\Debug\PassManager.pdb
+C:\Users\JStol\Desktop\PassManager_GitClone\PassManager\PassManager\PassManager\bin\Debug\PassManager.exe.config
+C:\Users\JStol\Desktop\PassManager_GitClone\PassManager\PassManager\PassManager\bin\Debug\PassManager.exe
+C:\Users\JStol\Desktop\PassManager_GitClone\PassManager\PassManager\PassManager\obj\Debug\PassManager.csproj.AssemblyReference.cache
+C:\Users\JStol\Desktop\PassManager_GitClone\PassManager\PassManager\PassManager\obj\Debug\PassManager.Form1_Login.resources
+C:\Users\JStol\Desktop\PassManager_GitClone\PassManager\PassManager\PassManager\obj\Debug\PassManager.Form2_Register.resources
+C:\Users\JStol\Desktop\PassManager_GitClone\PassManager\PassManager\PassManager\obj\Debug\PassManager.Form3_Home.resources
+C:\Users\JStol\Desktop\PassManager_GitClone\PassManager\PassManager\PassManager\obj\Debug\PassManager.Properties.Resources.resources
+C:\Users\JStol\Desktop\PassManager_GitClone\PassManager\PassManager\PassManager\obj\Debug\PassManager.csproj.GenerateResource.cache
+C:\Users\JStol\Desktop\PassManager_GitClone\PassManager\PassManager\PassManager\obj\Debug\PassManager.csproj.CoreCompileInputs.cache
+C:\Users\JStol\Desktop\PassManager_GitClone\PassManager\PassManager\PassManager\obj\Debug\PassManager.exe
+C:\Users\JStol\Desktop\PassManager_GitClone\PassManager\PassManager\PassManager\obj\Debug\PassManager.pdb
+C:\Users\JStol\Desktop\PassManager_GitClone\PassManager\PassManager\PassManager\bin\Debug\PassManager.pdb

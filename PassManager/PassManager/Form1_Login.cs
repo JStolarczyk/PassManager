@@ -58,7 +58,7 @@ namespace PassManager
             if (credentials.TryGetValue(username, out var storedCredentials))
             {
                 // Compare the entered password with the stored hash and salt
-                if (new Utilities().VerifyPassword(password, storedCredentials.HashedPassword, storedCredentials.Salt))
+                if (new Utils().VerifyPassword(password, storedCredentials.HashedPassword, storedCredentials.Salt))
                 {
                     // DECRYPT THE USERS PASSWORDS
                     if (!File.Exists(userFilePath))

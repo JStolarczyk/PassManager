@@ -48,7 +48,7 @@ namespace PassManager
             }
 
             //generate hashed password and salt
-            hashedPassword = new Utilities().HashPassword(password1, out salt);
+            hashedPassword = new Utils().HashPassword(password1, out salt);
 
             if (!File.Exists(filePath))
             {
@@ -91,7 +91,7 @@ namespace PassManager
 
             // .::ONLY FOR TEST!!!::.
             string mockPlainText = "test";
-            string encryptedTest = new Utilities().EncryptPassword(mockPlainText, password1);
+            string encryptedTest = new Utils().EncryptPassword(mockPlainText, password1);
             string mockEntry = $"test_title test_username {encryptedTest},\n";
             File.AppendAllText(userFilePath, mockEntry);
 

@@ -43,7 +43,7 @@
             this.dgvLoginPairs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLoginPairs.Dock = System.Windows.Forms.DockStyle.Left;
             this.dgvLoginPairs.Location = new System.Drawing.Point(0, 0);
-            this.dgvLoginPairs.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvLoginPairs.Margin = new System.Windows.Forms.Padding(4);
             this.dgvLoginPairs.Name = "dgvLoginPairs";
             this.dgvLoginPairs.RowHeadersWidth = 51;
             this.dgvLoginPairs.Size = new System.Drawing.Size(669, 554);
@@ -98,6 +98,7 @@
             this.btnShowPassword.TabIndex = 5;
             this.btnShowPassword.Text = "Show Password";
             this.btnShowPassword.UseVisualStyleBackColor = true;
+            this.btnShowPassword.Click += new System.EventHandler(this.btnShowPassword_Click);
             // 
             // btnCopyPassword
             // 
@@ -108,6 +109,7 @@
             this.btnCopyPassword.TabIndex = 6;
             this.btnCopyPassword.Text = "Copy Password";
             this.btnCopyPassword.UseVisualStyleBackColor = true;
+            this.btnCopyPassword.Click += new System.EventHandler(this.btnCopyPassword_Click);
             // 
             // Form3_Home
             // 
@@ -121,7 +123,7 @@
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.btnAddEntry);
             this.Controls.Add(this.dgvLoginPairs);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form3_Home";
             this.Text = "Form3_Home";
             ((System.ComponentModel.ISupportInitialize)(this.dgvLoginPairs)).EndInit();
