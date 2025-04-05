@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PasswordChecker;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -29,7 +30,7 @@ namespace PassManager
             Hide();
             new Form1_Login().Show();
         }
-
+        
         private void btnShowPassword_Click(object sender, EventArgs e)
         {
             //ensure at least one row is selected OR the password column is clicked
@@ -120,6 +121,70 @@ namespace PassManager
             else
             {
                 MessageBox.Show("Please select an entry or click on the password field.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+        }
+
+        private void btnAddEntry_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvLoginPairs_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            Form4 form4 = new Form4();
+            form4.ShowDialog();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            dgvLoginPairs.AllowUserToDeleteRows = true;
+
+            if (dgvLoginPairs.SelectedRows.Count > 0) // Check if a row is selected
+            {
+                foreach (DataGridViewRow row in dgvLoginPairs.SelectedRows)
+                {
+                    if (!row.IsNewRow) // Ensure it's not the empty new row
+                    {
+                        //dgvLoginPairs.Rows.Remove(row);
+                        DataRowView drv = row.DataBoundItem as DataRowView;
+
+                        if (drv != null)
+                        {
+                            drv.Row.Delete(); // Proper way to delete when bound to DataTable
+                       }
+                    }
+                }
+
+
+                SaveUpdatedData(); // Save after deletion
+            }
+            else
+            {
+                MessageBox.Show("Please select a row to delete.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+        string Password_File = "test.txt";
+        private void SaveUpdatedData()
+        {
+            using (StreamWriter writer = new StreamWriter(Password_File))
+            {
+                foreach (DataGridViewRow row in dgvLoginPairs.Rows)
+                {
+                    if (!row.IsNewRow) // Ignore empty row
+                    {
+                        string title = row.Cells["Title"].Value?.ToString() ?? "";
+                        string username = row.Cells["Username"].Value?.ToString() ?? "";
+                        string password = row.Cells["maskedPassword"].Value?.ToString() ?? "";
+
+                        writer.WriteLine($"{title},{username},{password}");
+                    }
+                }
             }
 
         }

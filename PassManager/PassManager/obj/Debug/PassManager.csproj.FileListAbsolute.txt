@@ -57,3 +57,17 @@ C:\Users\JStol\Desktop\PassManager_GitClone\PassManager\PassManager\PassManager\
 C:\Users\JStol\Desktop\PassManager_GitClone\PassManager\PassManager\PassManager\obj\Debug\PassManager.exe
 C:\Users\JStol\Desktop\PassManager_GitClone\PassManager\PassManager\PassManager\obj\Debug\PassManager.pdb
 C:\Users\JStol\Desktop\PassManager_GitClone\PassManager\PassManager\PassManager\bin\Debug\PassManager.pdb
+C:\Users\PC\Downloads\PasswordKey\PassManager\PassManager\bin\Debug\PassManager.exe.config
+C:\Users\PC\Downloads\PasswordKey\PassManager\PassManager\bin\Debug\PassManager.exe
+C:\Users\PC\Downloads\PasswordKey\PassManager\PassManager\bin\Debug\PassManager.pdb
+C:\Users\PC\Downloads\PasswordKey\PassManager\PassManager\obj\Debug\PassManager.csproj.AssemblyReference.cache
+C:\Users\PC\Downloads\PasswordKey\PassManager\PassManager\obj\Debug\PassManager.Form1_Login.resources
+C:\Users\PC\Downloads\PasswordKey\PassManager\PassManager\obj\Debug\PassManager.Form2_Register.resources
+C:\Users\PC\Downloads\PasswordKey\PassManager\PassManager\obj\Debug\PassManager.Form3_Home.resources
+C:\Users\PC\Downloads\PasswordKey\PassManager\PassManager\obj\Debug\PassManager.Properties.Resources.resources
+C:\Users\PC\Downloads\PasswordKey\PassManager\PassManager\obj\Debug\PassManager.csproj.GenerateResource.cache
+C:\Users\PC\Downloads\PasswordKey\PassManager\PassManager\obj\Debug\PassManager.csproj.CoreCompileInputs.cache
+C:\Users\PC\Downloads\PasswordKey\PassManager\PassManager\obj\Debug\PassManager.exe
+C:\Users\PC\Downloads\PasswordKey\PassManager\PassManager\obj\Debug\PassManager.pdb
+C:\Users\PC\Downloads\PasswordKey\PassManager\PassManager\obj\Debug\PasswordChecker.Form4.resources
+C:\Users\PC\Downloads\PasswordKey\PassManager\PassManager\obj\Debug\PassManager.Add.resources

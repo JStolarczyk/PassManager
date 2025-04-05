@@ -23,6 +23,7 @@ namespace PasswordChecker
         }
 
         private DataGridView _dataGridView;
+        
         public Form4(DataGridView dataGridView)
         {
             InitializeComponent();
