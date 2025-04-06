@@ -19,6 +19,8 @@ namespace PassManager
         {
             InitializeComponent();
             parentForm = form; // Store the passed reference
+
+
             ThemeToggle.ApplyTheme(this);
             ThemeToggle.SetThemeButtonText(btnThemeToggle);
         }

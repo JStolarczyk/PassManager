@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Security.Cryptography;
+using System.Text.RegularExpressions;
+using System.Configuration;
 
 namespace PassManager
 {
@@ -124,5 +126,89 @@ namespace PassManager
             }
             ThemeToggle.SetThemeButtonText(btnThemeToggle);
         }
+
+        private void txtPassword2_TextChanged(object sender, EventArgs e)
+        {
+            // Sets the password to read the txt in password textbox 1 
+            string password = txtPassword1.Text;
+            // This will be the indicator of what strength score you get 
+            int score = 0;
+
+            List<string> feedback = new List<string>();
+
+            // Set for length of 5 set it to whatever you want i just didnt want to write long passwords when testing
+            if (password.Length >= 5)
+            {
+                score++;
+            }
+            else
+            {
+               feedback.Add("Password must be atleast 5 characters");
+            }
+
+            if (Regex.IsMatch(password, @"[A-Z]"))
+            {
+                score++;
+            }
+            else
+            {
+                feedback.Add("Add Uppercase Letters");
+            }
+
+            if (Regex.IsMatch(password, @"\d"))
+            {
+                score++;
+            }
+            else
+            {
+                feedback.Add("Add a Number");
+            }
+
+            if (Regex.IsMatch(password, @"[\W]"))
+            {
+                score++;
+            }
+            else
+            {
+                feedback.Add("Add Special Characters");
+            }
+
+            switch (score)
+            {
+                case 0:
+                case 1:
+                    lbl_Password_Strength.Text = "Weak";
+                    lbl_Password_Strength.ForeColor = Color.Red;
+                    progressBar1.Value = 25;
+                    break;
+
+                case 2:
+                    lbl_Password_Strength.Text = "Medium";
+                    lbl_Password_Strength.ForeColor = Color.Orange;
+                    progressBar1.Value = 50;
+                    break;
+
+                case 3:
+                    lbl_Password_Strength.Text = "Strong";
+                    lbl_Password_Strength.ForeColor = Color.LightGreen;
+                    progressBar1.Value = 75;
+                    break;
+
+                case 4:
+                    lbl_Password_Strength.Text = "Very Strong";
+                    lbl_Password_Strength.ForeColor = Color.DarkGreen;
+                    progressBar1.Value = 100;
+                    break;
+
+                default:
+                    lbl_Password_Strength.Text = " ";
+                    lbl_Password_Strength.ForeColor = Color.White;
+                    progressBar1.Value = 0;
+                    break;
+            }
+
+            lbl_Password_Feedback.Text = string.Join(Environment.NewLine, feedback);
+        }
+
     }
 }

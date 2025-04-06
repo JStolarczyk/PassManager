@@ -65,6 +65,7 @@ namespace PassManager
                         }
                     }
                 }
+                // Everything else is set to this color scheme 
                 else
                 {
                     control.BackColor = Color.White;
