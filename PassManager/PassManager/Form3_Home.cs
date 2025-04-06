@@ -46,7 +46,7 @@ namespace PassManager
             dgvLoginPairs.EditingControlShowing += dgvLoginPairs_EditingControlShowing;
             dgvLoginPairs.CellMouseMove += dgvLoginPairs_CellMouseMove;
 
-            sessionTimer.Start();
+           
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
@@ -274,6 +274,13 @@ namespace PassManager
             sessionTimer = new Timer();
             sessionTimer.Interval = sessionTimeout;
             sessionTimer.Tick += SessionTimer_Tick;
+            sessionTimer.Start();
+        }
+
+        private void ResetTimer()
+        {
+            sessionTimer.Stop();
+            sessionTimer.Start();
         }
 
         // Added this could just be my UTM acting up since its shite but if i closed Form 3 the timer
@@ -296,15 +303,13 @@ namespace PassManager
         private void Form3_MouseMove(object sender, MouseEventArgs e)
         {
             // Event Handler for when user moves mouse cursor
-            sessionTimer.Stop();
-            sessionTimer.Start();
+            ResetTimer();
         }
 
         private void Form3_KeyDown(object sender, KeyEventArgs e)
         {
             // Event Handler for when user presses any key
-            sessionTimer.Stop();
-            sessionTimer.Start();
+            ResetTimer();
         }
 
         // All these handlers just use a different Event that it handles for the DGV:
@@ -323,15 +328,13 @@ namespace PassManager
         private void dgvEditing_KeyDown(object sender, KeyEventArgs e)
         {
             // Event Handler for when user presses any key
-            sessionTimer.Stop();
-            sessionTimer.Start();
+            ResetTimer();
         }
 
         private void dgvLoginPairs_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
         {
             // Event Handler for when user moves mouse cursor
-            sessionTimer.Stop();
-            sessionTimer.Start();
+            ResetTimer();
         }
 
         //**********************

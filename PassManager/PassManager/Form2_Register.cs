@@ -123,6 +123,8 @@ namespace PassManager
             {
                 ThemeToggle.DarkMode = true;
                 ThemeToggle.ApplyTheme(this);
+                btnRegister.BackColor = Color.LightGray;
+                btnRegister.ForeColor = Color.Black;
             }
             ThemeToggle.SetThemeButtonText(btnThemeToggle);
         }
@@ -205,6 +207,17 @@ namespace PassManager
                     lbl_Password_Strength.ForeColor = Color.White;
                     progressBar1.Value = 0;
                     break;
+            }
+
+            if (score < 3)
+            {
+                btnRegister.Enabled = false;
+                btnRegister.BackColor = Color.LightGray;
+                btnRegister.ForeColor = Color.Black;
+            }
+            else
+            {
+                btnRegister.Enabled = true;
             }
 
             lbl_Password_Feedback.Text = string.Join(Environment.NewLine, feedback);

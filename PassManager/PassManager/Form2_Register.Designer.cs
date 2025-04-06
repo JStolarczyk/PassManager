@@ -45,7 +45,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(47, 30);
+            this.label1.Location = new System.Drawing.Point(55, 16);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(56, 13);
@@ -55,7 +55,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(47, 62);
+            this.label2.Location = new System.Drawing.Point(55, 48);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 13);
@@ -65,7 +65,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(23, 92);
+            this.label3.Location = new System.Drawing.Point(31, 78);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(88, 13);
@@ -74,7 +74,7 @@
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(118, 24);
+            this.txtUsername.Location = new System.Drawing.Point(126, 10);
             this.txtUsername.Margin = new System.Windows.Forms.Padding(2);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(76, 20);
@@ -82,7 +82,7 @@
             // 
             // txtPassword1
             // 
-            this.txtPassword1.Location = new System.Drawing.Point(118, 57);
+            this.txtPassword1.Location = new System.Drawing.Point(126, 43);
             this.txtPassword1.Margin = new System.Windows.Forms.Padding(2);
             this.txtPassword1.Name = "txtPassword1";
             this.txtPassword1.PasswordChar = '*';
@@ -91,7 +91,7 @@
             // 
             // txtPassword2
             // 
-            this.txtPassword2.Location = new System.Drawing.Point(118, 90);
+            this.txtPassword2.Location = new System.Drawing.Point(126, 76);
             this.txtPassword2.Margin = new System.Windows.Forms.Padding(2);
             this.txtPassword2.Name = "txtPassword2";
             this.txtPassword2.PasswordChar = '*';
@@ -138,7 +138,7 @@
             // lbl_Password_Strength
             // 
             this.lbl_Password_Strength.AutoSize = true;
-            this.lbl_Password_Strength.Location = new System.Drawing.Point(4, 128);
+            this.lbl_Password_Strength.Location = new System.Drawing.Point(20, 114);
             this.lbl_Password_Strength.Name = "lbl_Password_Strength";
             this.lbl_Password_Strength.Size = new System.Drawing.Size(99, 13);
             this.lbl_Password_Strength.TabIndex = 10;
@@ -147,7 +147,7 @@
             // lbl_Password_Feedback
             // 
             this.lbl_Password_Feedback.AutoSize = true;
-            this.lbl_Password_Feedback.Location = new System.Drawing.Point(4, 158);
+            this.lbl_Password_Feedback.Location = new System.Drawing.Point(12, 146);
             this.lbl_Password_Feedback.Name = "lbl_Password_Feedback";
             this.lbl_Password_Feedback.Size = new System.Drawing.Size(107, 13);
             this.lbl_Password_Feedback.TabIndex = 11;
@@ -155,7 +155,7 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(118, 128);
+            this.progressBar1.Location = new System.Drawing.Point(126, 114);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(76, 22);
             this.progressBar1.TabIndex = 14;
