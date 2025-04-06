@@ -35,6 +35,7 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnShowPassword = new System.Windows.Forms.Button();
             this.btnCopyPassword = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLoginPairs)).BeginInit();
             this.SuspendLayout();
             // 
@@ -121,11 +122,22 @@
             this.btnCopyPassword.UseVisualStyleBackColor = true;
             this.btnCopyPassword.Click += new System.EventHandler(this.btnCopyPassword_Click);
             // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Location = new System.Drawing.Point(760, 12);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(105, 39);
+            this.btnRefresh.TabIndex = 7;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
             // Form3_Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1202, 692);
+            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnCopyPassword);
             this.Controls.Add(this.btnShowPassword);
             this.Controls.Add(this.btnDelete);
@@ -150,5 +162,6 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnShowPassword;
         private System.Windows.Forms.Button btnCopyPassword;
+        private System.Windows.Forms.Button btnRefresh;
     }
 }

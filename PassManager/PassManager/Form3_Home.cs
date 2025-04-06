@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace PassManager
 {
@@ -16,6 +17,7 @@ namespace PassManager
     {
 
         string username, password;
+        public string DGV_Title ;
 
         public Form3_Home(string _username, string _password)
         {
@@ -127,7 +129,8 @@ namespace PassManager
 
         private void btnAddEntry_Click(object sender, EventArgs e)
         {
-
+            Add addForm = new Add(this); // Pass current form as reference
+            addForm.ShowDialog();
         }
 
         private void dgvLoginPairs_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -135,42 +138,88 @@ namespace PassManager
 
         }
 
+        private void DeleteRowFromFile(string titleToDelete)
+        {
+            try
+            {
+                string filePath = Path.Combine("login_pairs", "test.txt");
+
+                // Read all lines from the file
+                var lines = File.ReadAllLines(filePath).ToList();
+
+                // Find and remove the line that matches the title to delete
+                var lineToRemove = lines.FirstOrDefault(line => line.StartsWith(titleToDelete + " "));
+
+                if (lineToRemove != null)
+                {
+                    lines.Remove(lineToRemove);  // Remove the line
+                    MessageBox.Show("Row deleted successfully!");
+                }
+                else
+                {
+                    MessageBox.Show("No matching row found.");
+                    return;
+                }
+
+                // Write the updated list of lines back to the file
+                File.WriteAllLines(filePath, lines);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error deleting row: " + ex.Message);
+            }
+        }
+
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            Form4 form4 = new Form4();
-            form4.ShowDialog();
+
+            if (dgvLoginPairs.SelectedRows.Count > 0)
+            {
+                // Get the first selected row
+                DataGridViewRow selectedRow = dgvLoginPairs.SelectedRows[0];
+
+                // Retrieve the value from a specific column (by column name or index)
+                 DGV_Title = selectedRow.Cells[0].Value.ToString(); // or .Cells[0]
+
+                // Optionally call delete logic
+                // DeleteRowFromFile(value1);
+                Form4 form4 = new Form4(this);
+                form4.ShowDialog();
+
+            }
+            else
+            {
+                MessageBox.Show("Please select a row to Edit.");
+            }
+
+            
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            dgvLoginPairs.AllowUserToDeleteRows = true;
-
-            if (dgvLoginPairs.SelectedRows.Count > 0) // Check if a row is selected
+            // Make sure at least one row is selected
+            if (dgvLoginPairs.SelectedRows.Count > 0)
             {
-                foreach (DataGridViewRow row in dgvLoginPairs.SelectedRows)
-                {
-                    if (!row.IsNewRow) // Ensure it's not the empty new row
-                    {
-                        //dgvLoginPairs.Rows.Remove(row);
-                        DataRowView drv = row.DataBoundItem as DataRowView;
+                // Get the first selected row
+                DataGridViewRow selectedRow = dgvLoginPairs.SelectedRows[0];
 
-                        if (drv != null)
-                        {
-                            drv.Row.Delete(); // Proper way to delete when bound to DataTable
-                       }
-                    }
-                }
+                // Retrieve the value from a specific column (by column name or index)
+                string value1 = selectedRow.Cells[0].Value.ToString(); // or .Cells[0]
 
-
-                SaveUpdatedData(); // Save after deletion
+                // Optionally call delete logic
+                // DeleteRowFromFile(value1);
+                DeleteRowFromFile(value1);
+          
             }
             else
             {
-                MessageBox.Show("Please select a row to delete.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select a row to delete.");
             }
+
         }
-        string Password_File = "test.txt";
-        private void SaveUpdatedData()
+
+               
+       /* private void SaveUpdatedData()
         {
             using (StreamWriter writer = new StreamWriter(Password_File))
             {
@@ -187,6 +236,25 @@ namespace PassManager
                 }
             }
 
+        }
+       */
+        public void AddLoginRow(string title, string username, string password)
+        {
+            DataTable dt = dgvLoginPairs.DataSource as DataTable;
+
+            if (dt != null)
+            {
+                DataRow row = dt.NewRow();
+                row["Title"] = title;
+                row["Username"] = username;
+                row["Password"] = password;
+                dt.Rows.Add(row);
+            }
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+           LoadLoginPairs(username, password);
         }
 
         //function to load login pairs from file and bind them to dgvLoginPairs
