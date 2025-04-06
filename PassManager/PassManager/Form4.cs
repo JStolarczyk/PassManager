@@ -25,7 +25,12 @@ namespace PasswordChecker
 
             // Access the public variable from Form1
             //string Title_value = _parentForm.DGV_Title;
-            
+
+
+            // Setting the theme when the form is contructed makes the theme and btn text persistent across all forms
+            ThemeToggle.ApplyTheme(this);
+            ThemeToggle.SetThemeButtonText(btnThemeToggle);
+
         }
 
        
@@ -148,15 +153,37 @@ namespace PasswordChecker
             string username = "username5";
             UpdatePasswordInFile(userFilePath, strtitle, username, password);
             MessageBox.Show("Password updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-
-
         }
 
         private void btn_Close_Click(object sender, EventArgs e)
         {
-            this.Close();
+            // OpenForms lets you find a form by name and access it.
+            // I used it here to update the theme and btn txt when you close form 4 and go back to form 3.
+            Form3_Home form3 = (Form3_Home)Application.OpenForms["Form3_Home"];
+            if (form3 != null) // If form 3 is open to apply the changes 
+            {
+                ThemeToggle.ApplyTheme(form3);
+                form3.UpdateThemeToggleButton();
+                form3.Refresh();
+            }
 
+            this.Close();
+        }
+
+        private void btnThemeToggle_Click(object sender, EventArgs e)
+        {
+            if (ThemeToggle.DarkMode)
+            {
+                ThemeToggle.DarkMode = false;
+                ThemeToggle.ApplyTheme(this);
+            }
+            else
+            {
+                ThemeToggle.DarkMode = true;
+                ThemeToggle.ApplyTheme(this);
+            }
+
+            ThemeToggle.SetThemeButtonText(btnThemeToggle);
         }
     }
 }

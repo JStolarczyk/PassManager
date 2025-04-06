@@ -71,3 +71,17 @@ C:\Users\PC\Downloads\PasswordKey\PassManager\PassManager\obj\Debug\PassManager.
 C:\Users\PC\Downloads\PasswordKey\PassManager\PassManager\obj\Debug\PassManager.pdb
 C:\Users\PC\Downloads\PasswordKey\PassManager\PassManager\obj\Debug\PasswordChecker.Form4.resources
 C:\Users\PC\Downloads\PasswordKey\PassManager\PassManager\obj\Debug\PassManager.Add.resources
+C:\Users\Oisin\Documents\New folder\PassManager\PassManager\bin\Debug\PassManager.exe.config
+C:\Users\Oisin\Documents\New folder\PassManager\PassManager\bin\Debug\PassManager.exe
+C:\Users\Oisin\Documents\New folder\PassManager\PassManager\bin\Debug\PassManager.pdb
+C:\Users\Oisin\Documents\New folder\PassManager\PassManager\obj\Debug\PassManager.csproj.AssemblyReference.cache
+C:\Users\Oisin\Documents\New folder\PassManager\PassManager\obj\Debug\PassManager.Add.resources
+C:\Users\Oisin\Documents\New folder\PassManager\PassManager\obj\Debug\PassManager.Form1_Login.resources
+C:\Users\Oisin\Documents\New folder\PassManager\PassManager\obj\Debug\PassManager.Form2_Register.resources
+C:\Users\Oisin\Documents\New folder\PassManager\PassManager\obj\Debug\PassManager.Form3_Home.resources
+C:\Users\Oisin\Documents\New folder\PassManager\PassManager\obj\Debug\PasswordChecker.Form4.resources
+C:\Users\Oisin\Documents\New folder\PassManager\PassManager\obj\Debug\PassManager.Properties.Resources.resources
+C:\Users\Oisin\Documents\New folder\PassManager\PassManager\obj\Debug\PassManager.csproj.GenerateResource.cache
+C:\Users\Oisin\Documents\New folder\PassManager\PassManager\obj\Debug\PassManager.csproj.CoreCompileInputs.cache
+C:\Users\Oisin\Documents\New folder\PassManager\PassManager\obj\Debug\PassManager.exe
+C:\Users\Oisin\Documents\New folder\PassManager\PassManager\obj\Debug\PassManager.pdb

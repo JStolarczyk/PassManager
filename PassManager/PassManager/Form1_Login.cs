@@ -16,6 +16,8 @@ namespace PassManager
         public Form1_Login()
         {
             InitializeComponent();
+            ThemeToggle.ApplyTheme(this);
+            ThemeToggle.SetThemeButtonText(this.btnThemeToggle);
         }
 
 
@@ -81,10 +83,25 @@ namespace PassManager
                 MessageBox.Show("Username not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
+       
         private void txtUsername_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnThemeToggle_Click_1(object sender, EventArgs e)
+        {
+            if (ThemeToggle.DarkMode)
+            {
+                ThemeToggle.DarkMode = false;
+                ThemeToggle.ApplyTheme(this);
+            }
+            else
+            {
+                ThemeToggle.DarkMode = true;
+                ThemeToggle.ApplyTheme(this);
+            }
+            ThemeToggle.SetThemeButtonText(btnThemeToggle);
         }
     }
 }

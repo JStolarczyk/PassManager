@@ -18,6 +18,8 @@ namespace PassManager
         public Form2_Register()
         {
             InitializeComponent();
+            ThemeToggle.ApplyTheme(this);
+            ThemeToggle.SetThemeButtonText(this.btnThemeToggle);
         }
 
         private void btnRegister_Click(object sender, EventArgs e)
@@ -106,6 +108,21 @@ namespace PassManager
             Hide();
             Form1_Login form1_login = new Form1_Login();
             form1_login.ShowDialog();
+        }
+
+        private void btnThemeToggle_Click_1(object sender, EventArgs e)
+        {
+            if (ThemeToggle.DarkMode)
+            {
+                ThemeToggle.DarkMode = false;
+                ThemeToggle.ApplyTheme(this);
+            }
+            else
+            {
+                ThemeToggle.DarkMode = true;
+                ThemeToggle.ApplyTheme(this);
+            }
+            ThemeToggle.SetThemeButtonText(btnThemeToggle);
         }
     }
 }

@@ -36,6 +36,7 @@
             this.txtPassword2 = new System.Windows.Forms.TextBox();
             this.btnRegister = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.btnThemeToggle = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -71,7 +72,7 @@
             // txtUsername
             // 
             this.txtUsername.Location = new System.Drawing.Point(118, 39);
-            this.txtUsername.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtUsername.Margin = new System.Windows.Forms.Padding(2);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(76, 20);
             this.txtUsername.TabIndex = 3;
@@ -79,7 +80,7 @@
             // txtPassword1
             // 
             this.txtPassword1.Location = new System.Drawing.Point(118, 76);
-            this.txtPassword1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPassword1.Margin = new System.Windows.Forms.Padding(2);
             this.txtPassword1.Name = "txtPassword1";
             this.txtPassword1.PasswordChar = '*';
             this.txtPassword1.Size = new System.Drawing.Size(76, 20);
@@ -88,7 +89,7 @@
             // txtPassword2
             // 
             this.txtPassword2.Location = new System.Drawing.Point(118, 118);
-            this.txtPassword2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPassword2.Margin = new System.Windows.Forms.Padding(2);
             this.txtPassword2.Name = "txtPassword2";
             this.txtPassword2.PasswordChar = '*';
             this.txtPassword2.Size = new System.Drawing.Size(76, 20);
@@ -98,7 +99,7 @@
             // 
             this.btnRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.btnRegister.Location = new System.Drawing.Point(286, 106);
-            this.btnRegister.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnRegister.Margin = new System.Windows.Forms.Padding(2);
             this.btnRegister.Name = "btnRegister";
             this.btnRegister.Size = new System.Drawing.Size(65, 32);
             this.btnRegister.TabIndex = 6;
@@ -110,7 +111,7 @@
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.button1.Location = new System.Drawing.Point(431, 178);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(56, 19);
             this.button1.TabIndex = 7;
@@ -118,11 +119,24 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // btnThemeToggle
+            // 
+            this.btnThemeToggle.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnThemeToggle.Location = new System.Drawing.Point(387, 11);
+            this.btnThemeToggle.Margin = new System.Windows.Forms.Padding(2);
+            this.btnThemeToggle.Name = "btnThemeToggle";
+            this.btnThemeToggle.Size = new System.Drawing.Size(98, 23);
+            this.btnThemeToggle.TabIndex = 9;
+            this.btnThemeToggle.Text = "Dark Mode";
+            this.btnThemeToggle.UseVisualStyleBackColor = true;
+            this.btnThemeToggle.Click += new System.EventHandler(this.btnThemeToggle_Click_1);
+            // 
             // Form2_Register
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(496, 199);
+            this.Controls.Add(this.btnThemeToggle);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnRegister);
             this.Controls.Add(this.txtPassword2);
@@ -131,7 +145,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form2_Register";
             this.Text = "Form2_Register";
             this.ResumeLayout(false);
@@ -149,5 +163,6 @@
         private System.Windows.Forms.TextBox txtPassword2;
         private System.Windows.Forms.Button btnRegister;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnThemeToggle;
     }
 }

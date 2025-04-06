@@ -15,6 +15,9 @@ namespace PassManager
 {
     public partial class Form3_Home : Form
     {
+        // SET AT 5 SECOND TIMER FOR TESTING
+        private const int sessionTimeout = 5 * 1000;
+        private Timer sessionTimer;
 
         string username, password;
         public string DGV_Title ;
@@ -25,10 +28,30 @@ namespace PassManager
             username = _username;
             password = _password;
             LoadLoginPairs(username, password);
+
+            // Setting the theme when the form is contructed makes the theme and btn text persistent across all forms
+            ThemeToggle.ApplyTheme(this);
+            ThemeToggle.SetThemeButtonText(btnToggleTheme);
+
+            // Session Timer: Creates a new timer at contruction with a set tick and intervals at which it ticks
+            IntiailizeSessionTimer();
+
+            // Stop Session Timer when 'X' (Close) is pressed otherwise timer was running in the background
+            this.FormClosing += Form3_Home_Form_Closing_Clean_Up;
+
+            //Mouse & Key movements for data grid view / form
+            this.MouseMove += Form3_MouseMove; // Reset on mouse move
+            this.KeyDown += Form3_KeyDown; // Reset on key press
+
+            dgvLoginPairs.EditingControlShowing += dgvLoginPairs_EditingControlShowing;
+            dgvLoginPairs.CellMouseMove += dgvLoginPairs_CellMouseMove;
+
+            sessionTimer.Start();
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
+            sessionTimer.Stop();
             Hide();
             new Form1_Login().Show();
         }
@@ -129,6 +152,7 @@ namespace PassManager
 
         private void btnAddEntry_Click(object sender, EventArgs e)
         {
+            sessionTimer.Stop();
             Add addForm = new Add(this); // Pass current form as reference
             addForm.ShowDialog();
         }
@@ -172,6 +196,7 @@ namespace PassManager
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
+            sessionTimer.Stop();
 
             if (dgvLoginPairs.SelectedRows.Count > 0)
             {
@@ -218,26 +243,125 @@ namespace PassManager
 
         }
 
-               
-       /* private void SaveUpdatedData()
-        {
-            using (StreamWriter writer = new StreamWriter(Password_File))
-            {
-                foreach (DataGridViewRow row in dgvLoginPairs.Rows)
-                {
-                    if (!row.IsNewRow) // Ignore empty row
-                    {
-                        string title = row.Cells["Title"].Value?.ToString() ?? "";
-                        string username = row.Cells["Username"].Value?.ToString() ?? "";
-                        string password = row.Cells["maskedPassword"].Value?.ToString() ?? "";
 
-                        writer.WriteLine($"{title},{username},{password}");
-                    }
-                }
+        /* private void SaveUpdatedData()
+         {
+             using (StreamWriter writer = new StreamWriter(Password_File))
+             {
+                 foreach (DataGridViewRow row in dgvLoginPairs.Rows)
+                 {
+                     if (!row.IsNewRow) // Ignore empty row
+                     {
+                         string title = row.Cells["Title"].Value?.ToString() ?? "";
+                         string username = row.Cells["Username"].Value?.ToString() ?? "";
+                         string password = row.Cells["maskedPassword"].Value?.ToString() ?? "";
+
+                         writer.WriteLine($"{title},{username},{password}");
+                     }
+                 }
+             }
+
+         }
+        */
+
+
+        //*************************
+        //*SESSION TIMEOUT CONTROL*
+        //*************************
+
+        private void IntiailizeSessionTimer()
+        {
+            sessionTimer = new Timer();
+            sessionTimer.Interval = sessionTimeout;
+            sessionTimer.Tick += SessionTimer_Tick;
+        }
+
+        // Added this could just be my UTM acting up since its shite but if i closed Form 3 the timer
+        // would run in the back so this is just a clean cut for it, remove if it doesnt happen for ye
+        private void Form3_Home_Form_Closing_Clean_Up(object sender, FormClosingEventArgs e)
+        {
+            sessionTimer.Stop();
+        }
+
+        private void SessionTimer_Tick(object sender, EventArgs e)
+        {
+            // Once timer limit has been hit will stop the timer and hide the form 3 and return to login again
+            sessionTimer.Stop();
+
+            MessageBox.Show("Session timed out! Returning to login.");
+            Hide();
+            new Form1_Login().Show();
+        }
+
+        private void Form3_MouseMove(object sender, MouseEventArgs e)
+        {
+            // Event Handler for when user moves mouse cursor
+            sessionTimer.Stop();
+            sessionTimer.Start();
+        }
+
+        private void Form3_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Event Handler for when user presses any key
+            sessionTimer.Stop();
+            sessionTimer.Start();
+        }
+
+        // All these handlers just use a different Event that it handles for the DGV:
+        //
+        // Edit Mode,
+        // If any key was pressed while in the DGV,
+        // Mouse movement in the DGV cells
+        private void dgvLoginPairs_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            // Turn OFF and ON when the user is editing the timer is being turned on and off everytime a
+            // key is pressed while in edit mode of a cell.
+            e.Control.KeyDown -= dgvEditing_KeyDown;
+            e.Control.KeyDown += dgvEditing_KeyDown;
+        }
+
+        private void dgvEditing_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Event Handler for when user presses any key
+            sessionTimer.Stop();
+            sessionTimer.Start();
+        }
+
+        private void dgvLoginPairs_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            // Event Handler for when user moves mouse cursor
+            sessionTimer.Stop();
+            sessionTimer.Start();
+        }
+
+        //**********************
+        //*TOGGLE THEME CONTROL*
+        //**********************
+
+        // Setting theme according to the button toggle
+        private void btnToggleTheme_Click_1(object sender, EventArgs e)
+        {
+            if (ThemeToggle.DarkMode)
+            {
+                ThemeToggle.DarkMode = false;
+                ThemeToggle.ApplyTheme(this);
+            }
+            else
+            {
+                ThemeToggle.DarkMode = true;
+                ThemeToggle.ApplyTheme(this);
             }
 
+            ThemeToggle.SetThemeButtonText(btnToggleTheme);
         }
-       */
+       
+
+        // Needed for updating the form 3 if changes are made in form 4
+        public void UpdateThemeToggleButton()
+        {
+            ThemeToggle.SetThemeButtonText(btnToggleTheme);
+        }
+
         public void AddLoginRow(string title, string username, string password)
         {
             DataTable dt = dgvLoginPairs.DataSource as DataTable;
@@ -256,6 +380,8 @@ namespace PassManager
         {
            LoadLoginPairs(username, password);
         }
+
+      
 
         //function to load login pairs from file and bind them to dgvLoginPairs
         private void LoadLoginPairs(string username, string userPassword)

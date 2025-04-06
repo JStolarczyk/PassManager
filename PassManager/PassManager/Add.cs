@@ -19,8 +19,9 @@ namespace PassManager
         {
             InitializeComponent();
             parentForm = form; // Store the passed reference
+            ThemeToggle.ApplyTheme(this);
+            ThemeToggle.SetThemeButtonText(btnThemeToggle);
         }
-
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -55,6 +56,22 @@ namespace PassManager
         private void Add_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnThemeToggle_Click(object sender, EventArgs e)
+        {
+            if (ThemeToggle.DarkMode)
+            {
+                ThemeToggle.DarkMode = false;
+                ThemeToggle.ApplyTheme(this);
+            }
+            else
+            {
+                ThemeToggle.DarkMode = true;
+                ThemeToggle.ApplyTheme(this);
+            }
+
+            ThemeToggle.SetThemeButtonText(btnThemeToggle);
         }
     }
 }
